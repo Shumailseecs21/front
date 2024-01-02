@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Image gallery</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Your custom styling -->
+    <style media="screen">
+        
+    </style>
+    <link rel="stylesheet" href="/indexDash.css">
+</head>
+<body>
+
+
+
+
+
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+<!-- Navigation Bar -->
+<nav  class="navbar navbar-dark " style="
+background-color: rgba(255,255,255,0.13);
+border-radius: 0px 0px 10px 10px;
+backdrop-filter: blur(10px);
+border: 2px solid rgba(255,255,255,0.1);
+box-shadow: 0 0 40px rgba(8,7,16,0.6);">
+
+
+    <!-- <h2>Cute image gallery</h2> -->
+    <a class="navbar-brand" href="#"><h3><strong>Yaadgaar </strong></h3> Image Gallery</a>
+    <div class="navbar-nav ml-auto">
+        <button class="btn btn-light"><a href="/gallery/uploadimage/<%= user._id %>">Upload Files</a></button>
+    </div>
+    <div class="navbar-nav ml-auto">
+        <!-- <button class="btn btn-light"><a href="/gallery/updateprofile/:userId">Manage Profile</a></button> -->
+        <span>user.username</span>
+    </div>
+</nav>
+
+<!-- Progress Bar and Usage Information -->
+<div class="container mt-5 border rounded">
+    <h1 style="color: azure;">Storage Usage</h1>
+    <div class="row">
+        <div style="    width: 100%;
+        margin: 10px;" class="progress-bar md-5">
+            <div class="progress-bar-inner" style="width:<%= (user.usedStorage / user.allocatedStorage) * 100 %>%;" ></div>
+        </div>
+    </div>
+    <div class="row mt-3 text-center">
+        <div class="col-md-12 text-center text-light">
+            <p id="usageInfo">You have used <%= user.usedStorage %> KBs out of <%= user.allocatedStorage %></p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 border rounded">
+    <h1 style="color: azure;">Bandwidth Usage</h1>
+    <div class="row">
+        <div style="    width: 100%;
+        margin: 10px;" class="progress-bar md-5">
+            <div class="progress-bar-inner" style="width:<%= (user.bandwidthUsed / user.bandwidthAllocated) * 100 %>%;" ></div>
+        </div>
+    </div>
+    <div class="row mt-3 text-center">
+        <div class="col-md-12 text-center text-light">
+            <p id="usageInfo">You have used <%= user.bandwidthUsed %> KBs out of <%= user.bandwidthAllocated %></p>
+        </div>
+    </div>
+</div>
+
+<!-- Image Gallery Container -->
+<div class="gallery-container">
+    <% if (user.images && user.images.length > 0) { %>
+        <% user.images.forEach((image) => { %>
+    <div class="gallery-item">
+
+        <img src="data:image/png;base64,<%= image.data %>" alt="Image">
+        <div class="image-name"><%= user.username %></div>
+        <!-- <form action="/gallery/image/delete/<%= image._id %>" method="post">
+            <button><i class="fas fa-trash"></i> Delete</button>
+        </form> -->
+    </div>
+    <% }) %>
+    <% } %>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Your custom JavaScript -->
+
+
+</body>
+</html>
